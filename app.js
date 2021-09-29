@@ -1,17 +1,12 @@
-const h1 = document.getElementById("main-title");
+const section = document.querySelector("section");
+const button = document.querySelector("button");
 
-h1.textContent = "some new title!"
-h1.style.color = 'white'
-h1.style.backgroundColor = 'black'
+section.className = "red-bg";
 
-const li = document.querySelector('li:last-of-type')
-li.textContent = li.textContent + ' (changed!)'
-
-const body = document.body
-console.dir(body)
-// const listItemElements = document.querySelectorAll("li");
-const listItemElements = document.getElementsByTagName("li");
-
-for (const element of listItemElements) {
-  console.dir(element);
-}
+button.addEventListener("click", () => {
+  if ((section.className === "red-bg visible")) {
+    section.className = "red-bg invisible";
+  } else {
+    section.className = "red-bg visible";
+  }
+});
