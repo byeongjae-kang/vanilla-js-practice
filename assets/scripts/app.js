@@ -16,6 +16,22 @@ const updateUI = () => {
   }
 };
 
+const renderNewElement = (title, urlImage, rating) => {
+  const li = document.createElement("li");
+  li.className = "movie-element";
+  li.innerHTML = `
+    <div class='movie-element__image'>
+      <img src=${urlImage} alt=${title}/>
+    </div>
+    <div class=movie-element__info>
+      <h2>${title}</h2>
+      <p>${rating}/5 stars</p>
+    </div>
+  `;
+  const movieList = document.getElementById("movie-list");
+  movieList.append(li);
+};
+
 const toggleBackdropClickHandler = () => {
   addMovieClickhandler();
 };
@@ -61,6 +77,7 @@ const submitMovieClickHandler = () => {
   movies.push(newMovie);
   addMovieClickhandler();
   clearMovieInput();
+  renderNewElement(titleInput, urlInput, ratingInput);
   updateUI();
   console.log(movies);
 };
