@@ -5,6 +5,7 @@ const movieCancelButton = document.querySelector(".btn--passive");
 const movieSubmitButton = document.querySelector(".btn--success");
 const allInputs = addMovieModal.querySelectorAll("input");
 const entryTextSection = document.getElementById("entry-text");
+const movieList = document.getElementById("movie-list");
 
 const movies = [];
 
@@ -16,7 +17,19 @@ const updateUI = () => {
   }
 };
 
-const renderNewElement = (title, urlImage, rating) => {
+const deleteMovieHandler = (movieId) => {
+  let movieIndex = 0;
+  for (const movie of movies) {
+    if (movie.id === movieId) {
+      break;
+    }
+    movieIndex++;
+  }
+  movies.splice(movieIndex, 1);
+  movieList.children[movieIndex].remove();
+};
+
+const renderNewElement = (id, title, urlImage, rating) => {
   const li = document.createElement("li");
   li.className = "movie-element";
   li.innerHTML = `
@@ -28,7 +41,7 @@ const renderNewElement = (title, urlImage, rating) => {
       <p>${rating}/5 stars</p>
     </div>
   `;
-  const movieList = document.getElementById("movie-list");
+  li.addEventListener("click", deleteMovieHandler.bind(null, id));
   movieList.append(li);
 };
 
@@ -69,6 +82,7 @@ const submitMovieClickHandler = () => {
   }
 
   const newMovie = {
+    id: Math.random().toString(),
     title: titleInput,
     image: urlInput,
     rating: ratingInput
@@ -77,7 +91,7 @@ const submitMovieClickHandler = () => {
   movies.push(newMovie);
   addMovieClickhandler();
   clearMovieInput();
-  renderNewElement(titleInput, urlInput, ratingInput);
+  renderNewElement(newMovie.id, titleInput, urlInput, ratingInput);
   updateUI();
   console.log(movies);
 };
