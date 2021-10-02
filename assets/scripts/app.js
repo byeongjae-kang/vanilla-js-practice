@@ -4,8 +4,17 @@ const movieAddButton = document.querySelector("header button");
 const movieCancelButton = document.querySelector(".btn--passive");
 const movieSubmitButton = document.querySelector(".btn--success");
 const allInputs = addMovieModal.querySelectorAll("input");
+const entryTextSection = document.getElementById("entry-text");
 
 const movies = [];
+
+const updateUI = () => {
+  if (movies.length === 0) {
+    entryTextSection.style.display = "block";
+  } else {
+    entryTextSection.style.display = "none";
+  }
+};
 
 const toggleBackdropClickHandler = () => {
   addMovieClickhandler();
@@ -52,6 +61,7 @@ const submitMovieClickHandler = () => {
   movies.push(newMovie);
   addMovieClickhandler();
   clearMovieInput();
+  updateUI();
   console.log(movies);
 };
 
